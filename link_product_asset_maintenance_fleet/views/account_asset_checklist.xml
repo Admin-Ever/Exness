@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Create account.asset.checklist form view-->
+        <record id="account_asset_checklist_form_view" model="ir.ui.view">
+            <field name="name">kik.account_asset_checklist.form</field>
+            <field name="model">account.asset.checklist</field>
+            <field name="arch" type="xml">
+                <form string="Asset Checklists">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+<!--                                <label for="checklist_id">Checklist</label>-->
+                                <field name="checklist_id"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="id" invisible="1"/>
+                                <field name="asset_id" invisible="1"/>
+                                <field name="vehicle_id" invisible="1"/>
+                                <field name="days"/>
+                                <field name="effective_date" attrs="{'readonly': [('id', '!=', False)]}"/>
+                                <field name="last_date"/>
+                                <field name="next_date"/>
+                                <field name="days_check_state"/>
+                            </group>
+                            <group>
+                                <field name="odometer" attrs="{'invisible':[('vehicle_id', '=', False)]}"/>
+                                <field name="effective_odometer" attrs="{'readonly': [('id', '!=', False)], 'invisible':[('vehicle_id', '=', False)]}"/>
+                                <field name="last_odometer" attrs="{'invisible':[('vehicle_id', '=', False)]}"/>
+                                <field name="next_odometer" attrs="{'invisible':[('vehicle_id', '=', False)]}"/>
+                                <field name="odometer_check_state" attrs="{'invisible':[('vehicle_id', '=', False)]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--Create account.asset.checklist tree view-->
+        <record id="account_asset_checklist_tree_view" model="ir.ui.view">
+            <field name="name">kik.account_asset_checklist.tree</field>
+            <field name="model">account.asset.checklist</field>
+            <field name="arch" type="xml">
+                <tree string="Asset Checklists">
+                    <field name="asset_id" invisible="1"/>
+                    <field name="vehicle_id" invisible="1"/>
+                    <field name="checklist_id"/>
+                    <field name="days"/>
+                    <field name="next_date"/>
+                    <field name="odometer"/>
+                    <field name="next_odometer"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Create account.asset.checklist search view-->
+        <record id="account_asset_checklist_search_view" model="ir.ui.view">
+            <field name="name">kik.account_asset_checklist.search</field>
+            <field name="model">account.asset.checklist</field>
+            <field name="arch" type="xml">
+                <search string="All Asset Checklists">
+                    <group expand="1" string="Group By">
+                        <filter string="Asset Checklists" name="checklist_id" domain="[]"
+                                context="{'group_by':'checklist_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--Create account.asset.checklist window action-->
+        <record id="account_asset_checklist_act_window" model="ir.actions.act_window">
+            <field name="name">Asset Checklists</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.asset.checklist</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

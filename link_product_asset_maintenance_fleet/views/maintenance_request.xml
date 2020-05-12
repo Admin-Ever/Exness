@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Inherit maintenance.request form view-->
+        <record id="maintenance_request_form_inherit" model="ir.ui.view">
+            <field name="name">kik.maintenance_request.form</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="create_task" string="Create Task" type="object"/>
+                </xpath>
+                <xpath expr="/form/sheet/div" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="get_tasks" icon="fa-tasks" class="oe_stat_button" type="object">
+                            <field string="Tasks" name="tasks_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='close_date']" position="attributes">
+                    <attribute name="readonly">False</attribute>
+                </xpath>
+                <xpath expr="//sheet/group[1]" position="after">
+                    <group string="Checklist">
+                        <field name="checklist_id"/>
+                        <group attrs="{'invisible':[('checklist_id', '=', False)]}">
+                            <field name="steps" widget="many2many_checkboxes"/>
+                        </group>
+                        <group attrs="{'invisible':[('checklist_id', '=', False)]}">
+                            <field name="steps_progress" widget="percentpie"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

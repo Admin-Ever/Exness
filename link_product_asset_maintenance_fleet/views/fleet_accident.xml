@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Create fleet.accident form view-->
+        <record id="fleet_accident_form_view" model="ir.ui.view">
+            <field name="name">kik.fleet_accident.form</field>
+            <field name="model">fleet.accident</field>
+            <field name="arch" type="xml">
+                <form string="Accidents">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="get_services" icon="fa-wrench" class="oe_stat_button" type="object">
+                                <field string="Services" name="services_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="vehicle_id"/>
+                                <field name="accident_date"/>
+                                <field name="driver_id" domain="[('is_driver', '=', True)]"/>
+                                <field name="insurance"/>
+
+                            </group>
+                            <group>
+                                <field name="second_party_name"/>
+                                <field name="second_party_phone"/>
+                                <field name="second_party_insurance"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Address">
+                                <!--                                    <field name="street" placeholder="Street..." class="o_address_street"/>-->
+                                <!--                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>-->
+                                <!--                                    <field name="city" placeholder="City" class="o_address_city"/>-->
+                                <!--                                    <field name="state_id" class="o_address_state" placeholder="State"-->
+                                <!--                                           options='{"no_open": True}'/>-->
+                                <!--                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>-->
+                                <!--                                    <field name="country_id" placeholder="Country" class="o_address_country"-->
+                                <!--                                           options='{"no_open": True, "no_create": True}'/>-->
+                                <field name="latitude" placeholder="Latitude"
+                                       attrs="{'required':[('longitude', '!=', 0)]}"/>
+                                <field name="longitude" placeholder="Longitude"
+                                       attrs="{'required':[('latitude', '!=', 0)]}"/>
+                                <button name="open_map" string="Map" type="object" class="oe_highlight"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!--Create fleet.accident tree view-->
+        <record id="fleet_accident_tree_view" model="ir.ui.view">
+            <field name="name">kik.fleet_accident.tree</field>
+            <field name="model">fleet.accident</field>
+            <field name="arch" type="xml">
+                <tree string="Accidents">
+                    <field name="vehicle_id"/>
+                    <field name="accident_date"/>
+                    <field name="driver_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Create fleet.accident search view-->
+        <record id="fleet_accident_search_view" model="ir.ui.view">
+            <field name="name">kik.fleet_accident.search</field>
+            <field name="model">fleet.accident</field>
+            <field name="arch" type="xml">
+                <search string="All Accidents">
+                    <group expand="1" string="Group By">
+                        <filter string="Vehicle" name="vehicle_id" domain="[]"
+                                context="{'group_by':'vehicle_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--Create fleet.accident window action-->
+        <record id="fleet_accident_act_window" model="ir.actions.act_window">
+            <field name="name">Vehicles Accidents</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fleet.accident</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Create fleet.accident menu -->
+        <menuitem name="Vehicles Accidents" id="fleet_accident_menu" parent="fleet.fleet_vehicles"
+                  action="fleet_accident_act_window"/>
+
+    </data>
+</odoo>

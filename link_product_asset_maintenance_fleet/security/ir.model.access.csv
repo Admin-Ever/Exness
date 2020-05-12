@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fleet_accident_id,link_product_asset_maintenance_fleet.fleet_accident,model_fleet_accident,,1,1,1,1
+access_res_partner_license_id,link_product_asset_maintenance_fleet.res_partner_license,model_res_partner_license,,1,1,1,1
+access_account_checklist_id,link_product_asset_maintenance_fleet.account_checklist,model_account_checklist,,1,1,1,1
+access_account_asset_checklist_id,link_product_asset_maintenance_fleet.account_asset_checklist,model_account_asset_checklist,,1,1,1,1
+access_account_checklist_steps_id,link_product_asset_maintenance_fleet.account_checklist_steps,model_account_checklist_steps,,1,1,1,1

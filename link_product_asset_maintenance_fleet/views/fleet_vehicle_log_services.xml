@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Inherit fleet.vehicle.log.services form view-->
+        <record id="fleet_vehicle_log_services_form_inherit" model="ir.ui.view">
+            <field name="name">kik.fleet_vehicle_log_services.form</field>
+            <field name="model">fleet.vehicle.log.services</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_log_services_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="change_pending" string="Change State to In Progress" type="object"
+                                attrs="{'invisible':[('state', '!=', 'draft')]}"/>
+                        <button name="change_done" string="Change State to Done" type="object"
+                                attrs="{'invisible':[('state', '!=', 'pending')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                </xpath>
+                <xpath expr="//field[@name='cost_subtype_id']" position="after">
+                    <field name="accident_id"/>
+                </xpath>
+                <xpath expr="//field[@name='amount']" position="before">
+                    <field name="total_indicative" force_save="1"/>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="after">
+                    <field name="close_date" attrs="{'invisible':[('state', '!=', 'done')]}"/>
+                </xpath>
+                <xpath expr="//sheet/group[2]" position="after">
+                    <group string="Checklist">
+                        <field name="checklist_id"/>
+                        <group attrs="{'invisible':[('checklist_id', '=', False)]}">
+                            <field name="steps" widget="many2many_checkboxes"/>
+                        </group>
+                        <group attrs="{'invisible':[('checklist_id', '=', False)]}">
+                            <field name="steps_progress" widget="percentpie"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='cost_ids']" position="attributes">
+                    <attribute name="context">{'default_vendor_id': vendor_id}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='cost_ids']//field[@name='cost_subtype_id']" position="replace">
+                    <field name="product_id"/>
+                </xpath>
+                <xpath expr="//field[@name='cost_ids']//field[@name='amount']" position="before">
+                    <field name="vendor_id" invisible="1"/>
+                    <field name="quantity"/>
+                    <field name="unit_cost"/>
+                </xpath>
+                <xpath expr="//field[@name='cost_ids']//field[@name='amount']" position="attributes">
+                    <attribute name="readonly">True</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

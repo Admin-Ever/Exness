@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Inherit product.product form view-->
+        <record id="product_product_form_inherit" model="ir.ui.view">
+            <field name="name">kik.product_product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="create_asset" string="Create Asset" type="object"/>
+                    <button name="create_equipment" string="Create Equipment" type="object"/>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="get_assets" icon="fa-cube" class="oe_stat_button" type="object">
+                        <field string="Assets" name="assets_count" widget="statinfo"/>
+                    </button>
+                    <button name="get_equipments" icon="fa-cube" class="oe_stat_button" type="object">
+                        <field string="Equipments" name="equipments_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

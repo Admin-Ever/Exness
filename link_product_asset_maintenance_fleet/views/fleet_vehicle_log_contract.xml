@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Inherit fleet.vehicle.log.contract form view-->
+        <record id="fleet_vehicle_log_contract_form_inherit" model="ir.ui.view">
+            <field name="name">kik.fleet_vehicle_log_contract.form</field>
+            <field name="model">fleet.vehicle.log.contract</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='purchaser_id']" position="attributes">
+                    <attribute name="domain">[('is_driver', '=', True)]</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

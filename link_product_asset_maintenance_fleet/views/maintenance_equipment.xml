@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Inherit maintenance.equipment form view-->
+        <record id="maintenance_equipment_form_inherit" model="ir.ui.view">
+            <field name="name">kik.maintenance_equipment.form</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="location_id" force_save="1" attrs="{'invisible': [('serial_nb', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='equipment_assign_to']" position="attributes">
+                    <attribute name="readonly">True</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='department_id']" position="after">
+                    <field name="res_partner_id" string="Contact" readonly="1" force_save="1"
+                           attrs="{'invisible': ['|', ('equipment_assign_to', 'in', ('department', 'employee', 'vehicle')), ('equipment_assign_to', '=', False)]}"/>
+                    <field name="fleet_vehicle_id" string="Vehicle" readonly="1" force_save="1"
+                           attrs="{'invisible': ['|', ('equipment_assign_to', 'in', ('department', 'employee', 'contact')), ('equipment_assign_to', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('equipment_assign_to', 'in', ('department', 'contact', 'vehicle')), ('equipment_assign_to', '=', False)]}</attribute>
+                    <attribute name="readonly">True</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='department_id']" position="attributes">
+                    <attribute name="attrs">{'invisible':['|', ('equipment_assign_to', 'in', ('employee', 'contact', 'vehicle')), ('equipment_assign_to', '=', False)]}</attribute>
+                    <attribute name="readonly">True</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='scrap_date']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_ref']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='model']" position="after">
+                    <field name="product_templ" attrs="{'invisible':[('product_templ', '=', False)], 'required':[('product_templ', '!=', False)]}"/>
+                    <field name="product_prod" attrs="{'invisible':[('product_templ', '=', False)], 'required':[('product_templ', '!=', False)]}"/>
+                    <field name="serial_nb" attrs="{'invisible':[('product_prod', '=', False)], 'required':[('product_templ', '!=', False)]}"/>
+<!--                    <field name="asset_id" invisible="1"/>-->
+                </xpath>
+                <xpath expr="//field[@name='model']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='serial_no']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('product_prod', '!=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='cost']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

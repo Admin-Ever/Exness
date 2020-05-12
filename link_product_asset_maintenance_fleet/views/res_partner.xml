@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Inherit res.partner form view-->
+        <record id="res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">kik.res_partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="before">
+                    <field name="code" placeholder="Code"/>
+                </xpath>
+                <xpath expr="//field[@name='type']" position="before">
+                    <field name="is_driver" attrs="{'invisible':[('company_type', '!=', 'person')]}"/>
+                    <field name="is_customer"/>
+                    <field name="is_supplier"/>
+                    <field name="is_partner"/>
+                    <field name="is_interested_person"/>
+                </xpath>
+                <xpath expr="//field[@name='website']" position="before">
+                    <field name="telefax"/>
+                </xpath>
+                <xpath expr="//field[@name='property_payment_term_id']" position="after">
+                    <field name="common_discount"/>
+                </xpath>
+                <xpath expr="//field[@name='credit_limit']" position="after">
+                    <field name="credit_limit_date"/>
+                </xpath>
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page string="More Infos">
+                        <label for="deletion_mark"/>
+                        <field name="deletion_mark"/><br/>
+                        <label for="is_locked"/>
+                        <field name="is_locked"/><br/>
+                        <label for="is_master_account"/>
+                        <field name="is_master_account"/><br/>
+                        <label for="overdue_days"/>
+                        <field name="overdue_days"/>
+                        <label for="invoice_method"/>
+                        <field name="invoice_method"/>
+                        <label for="payment_by"/>
+                        <field name="payment_by"/>
+                    </page>
+                    <page string="Accidents" attrs="{'invisible':[('is_driver', '=', False)]}">
+                        <field name="accidents_ids">
+                            <tree create="false" edit="false" delete="false">
+                                <field name="vehicle_id"/>
+                                <field name="accident_date"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Licenses" attrs="{'invisible':[('is_driver', '=', False)]}">
+                        <field name="licenses_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="issue_date"/>
+                                <field name="expiry_date"/>
+                                <field name="description"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="file"/>
+                                    <field name="issue_date"/>
+                                    <field name="expiry_date"/>
+                                    <field name="description"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="link_product_asset_maintenance_fleet.list">
+      <field name="name">link_product_asset_maintenance_fleet list</field>
+      <field name="model">link_product_asset_maintenance_fleet.link_product_asset_maintenance_fleet</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="link_product_asset_maintenance_fleet.action_window">
+      <field name="name">link_product_asset_maintenance_fleet window</field>
+      <field name="res_model">link_product_asset_maintenance_fleet.link_product_asset_maintenance_fleet</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="link_product_asset_maintenance_fleet.action_server">
+      <field name="name">link_product_asset_maintenance_fleet server</field>
+      <field name="model_id" ref="model_link_product_asset_maintenance_fleet_link_product_asset_maintenance_fleet"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="link_product_asset_maintenance_fleet" id="link_product_asset_maintenance_fleet.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="link_product_asset_maintenance_fleet.menu_1" parent="link_product_asset_maintenance_fleet.menu_root"/>
+    <menuitem name="Menu 2" id="link_product_asset_maintenance_fleet.menu_2" parent="link_product_asset_maintenance_fleet.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="link_product_asset_maintenance_fleet.menu_1_list" parent="link_product_asset_maintenance_fleet.menu_1"
+              action="link_product_asset_maintenance_fleet.action_window"/>
+    <menuitem name="Server to list" id="link_product_asset_maintenance_fleet" parent="link_product_asset_maintenance_fleet.menu_2"
+              action="link_product_asset_maintenance_fleet.action_server"/>
+-->
+  </data>
+</odoo>

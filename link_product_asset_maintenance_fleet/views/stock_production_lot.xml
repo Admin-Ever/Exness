@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Inherit stock.production.lot form view-->
+        <record id="stock_production_lot_form_inherit" model="ir.ui.view">
+            <field name="name">kik.stock_production_lot.form</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="get_assets" string="Assets" icon="fa-cube" class="oe_stat_button" type="object"
+                            attrs="{'invisible':[('is_asset', '=', False)]}"/>
+                    <button name="get_equipments" string="Equipments" icon="fa-cube" class="oe_stat_button"
+                            type="object" attrs="{'invisible':[('is_equipment', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="is_asset" force_save="1"/>
+                    <field name="is_equipment" force_save="1"/>
+                    <field name="location_id" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--Inherit stock.production.lot tree view-->
+        <record id="stock_production_lot_tree_inherit" model="ir.ui.view" >
+            <field name="name">kik.stock_production_lot.tree</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="is_asset"/>
+                    <field name="is_equipment"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

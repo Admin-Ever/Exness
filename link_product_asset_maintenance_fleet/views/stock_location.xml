@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Inherit stock.location form view-->
+        <record id="stock_location_form_inherit" model="ir.ui.view">
+            <field name="name">kik.stock_location.form</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='usage']" position="after">
+                    <field name="res_partner_id" attrs="{'invisible':[('usage', 'not in', ('supplier','customer','employee'))]}"/>
+                    <field name="hr_department_id" attrs="{'invisible':[('usage', 'not in', ('department'))]}"/>
+                    <field name="fleet_vehicle_id" attrs="{'invisible':[('usage', 'not in', ('vehicle'))]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
